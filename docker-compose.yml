@@ -1,0 +1,40 @@
+version: '3'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+  jupyter:
+    image: jupyter/all-spark-notebook
+    ports:
+      - "8888:8888"
+      - "4040-4048:4040-4048"
+    volumes:
+      - ./notebooks:/home/jovyan/work/notebooks/
+  postgres:
+    restart: always
+    image: postgres
+    environment:
+      - POSTGRES_USER=analytics
+      - POSTGRES_PASSWORD=analytics
+      - POSTGRES_DB=analytics
+    volumes:
+      - ./data/postgres-data/postgres:/var/lib/postgresql/data
+    ports:
+      - 5431:5432
+
+  api:
+    restart: always
+    build: ./app
+    ports:
+      - 5000:5000
+    volumes:
+      - ./app:/app
+    depends_on:
+      - postgres
+    entrypoint: ["python", "api.py"]
