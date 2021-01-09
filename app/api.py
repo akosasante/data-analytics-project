@@ -1,11 +1,14 @@
 from flask import Flask
+import base64
+import requests
 
 app = Flask(__name__)
+app.config.from_envvar('APP_CONFIG_PATH')
 
 
 @app.route("/")
 def hello():
-    return "<h1 style='color:blue'>Hello There!</h1>"
+    return app.config['MY_SPORTSFEED_API_KEY']
 
 
 if __name__ == "__main__":
