@@ -28,6 +28,14 @@ def init_data():
 
 
 @cli.command()
+@click.option('--year', '-y', default='', help='Which year\'s stats do you want to ingest?')
+def get_year_data(year):
+    click.echo('ingest season data')
+    click.echo('ingest nba data from sportsdata.io')
+    ingest_sportsdata_data_for_year(year)
+
+
+@cli.command()
 @click.option('--entity', '-e', default='', help='Which entity?')
 def update_entity(entity):
     for e in entity:
@@ -36,7 +44,11 @@ def update_entity(entity):
 
 
 def ingest_sportsdata_data():
-    SportsdataAPI(sportsdata_api_key).ingest_data(db, models)
+    SportsdataAPI(sportsdata_api_key).ingest_data(click, db, models)
+
+
+def ingest_sportsdata_data_for_year(year):
+    SportsdataAPI(sportsdata_api_key).ingest_season_data(year, click, db, models)
 
 
 if __name__ == '__main__':

@@ -35,3 +35,43 @@ class SportsDataIO_NBAStadium(db.Model):
     id = db.Column(BIGINT, primary_key=True)
     raw_json = db.Column(JSONB)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+
+class SportsDataIO_NBASeasonStandings(db.Model):
+    __tablename__ = 'sports_data_io_nba_season_standings'
+    id = db.Column(BIGINT, primary_key=True)
+    year = db.Column(db.Integer)
+    raw_json = db.Column(JSONB)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+
+class SportsDataIO_NBASeasonAllStars(db.Model):
+    __tablename__ = 'sports_data_io_nba_season_all_stars'
+    id = db.Column(BIGINT, primary_key=True)
+    year = db.Column(db.Integer)
+    raw_json = db.Column(JSONB)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+
+class SportsDataIO_NBASeasonGameStats(db.Model):
+    __tablename__ = 'sports_data_io_nba_season_game_stats'
+    id = db.Column(BIGINT, primary_key=True)
+    year = db.Column(db.Integer)
+    raw_json = db.Column(JSONB)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+
+class SportsDataIO_NBASeasonTeamStats(db.Model):
+    __tablename__ = 'sports_data_io_nba_season_team_stats'
+    id = db.Column(BIGINT, primary_key=True)
+    year = db.Column(db.Integer)
+    raw_json = db.Column(JSONB)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+
+class SportsDataIO_NBASeasonPlayerStats(db.Model):
+    __tablename__ = 'sports_data_io_nba_season_player_stats'
+    id = db.Column(BIGINT, primary_key=True)
+    year = db.Column(db.Integer)
+    raw_json = db.Column(JSONB)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
